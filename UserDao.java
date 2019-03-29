@@ -1,0 +1,14 @@
+package Dao;
+import java.util.List;
+import model.*;
+
+public interface UserDao {
+		public int addUser(User user);
+		public User getUserById(String user_id);
+		public List<User> getAllUsers();
+		public void updateUser(User user);
+		public void deleteUser(String user_id);
+		public User getUserByName(String uname);
+		void passwordChange(String user_id, String password);
+		
+}
