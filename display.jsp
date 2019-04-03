@@ -71,7 +71,7 @@ productList = new ProductDAOImpl().getAllProducts();
 	%>
 	<tr> <td> <%=temp.getInventory_Id() %> </td>   <td> <%=temp.getInventory_Name() %> </td> <td> <%= temp.getCreation_date() %> </td>   <td> <%=temp.getStart_date()%> </td>  <td> <%=temp.getEnd_date()%> </td>  <td>
 	<%=temp.getTotal_Stock() %></td> <td>
-	<a href="EditProductController?e1=<%=temp.getInventory_Id()%>"class="btn btn-info" ><span class="glyphicon glyphicon-edit"></span> EDIT</a></td><td>
+	<a href="EditProductController?id=<%=temp.getInventory_Id()%>"class="btn btn-info" ><span class="glyphicon glyphicon-edit"></span> EDIT</a></td><td>
 	<a href="DeleteProductController?q1=<%=temp.getInventory_Id()%>" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> DELETE</a></td> </tr>
 	<%} %>
 </table>

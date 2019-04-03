@@ -10,18 +10,26 @@
 <title>Insert title here</title>
 </head>
 <body class="container-fluid" background="restrobg.png" style ="color:White">
-<h1><center>GESBK RESTAURANT</center></h1>
-<p></p>
-<div class="container-fluid">
-		<nav class="navbar navbar-collapse">
-		<div class="-fluid">
-			<a class="navbar-brand" href="#"><p style="font-size: 20px;">GR</p></a>
-			<a href="register.jsp"><p style="font-size: 20px;">SIGN UP</p></a> 
-		<a href="login.jsp"><p style="font-size: 20px;">SIGN IN</p></a>  
-				<a href="contact.jsp"><p style="font-size: 20px;">CONTACT US</p></a> 
-		</div>
+<h1><center><b><p style="color:tomato;font-size:50px;">WELCOME TO GESBK RESTAURANT</p></b></center></h1>
+</head>
+<body class="container-fluid" background="restrobg.png" style ="color:White">
+<div class="container">
+
+	<nav class="navbar navbar-reverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><p style="font-size:20px;">GR</p></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="register.jsp"><p style="font-size:20px;">SIGN UP</p></a></li>
+      <li><a href="login.jsp"><p style="font-size:20px;">SIGN IN</p></a></li>
+      <li><a href="contact.jsp"><p style="font-size:20px;">CONTACT US</p></a></li>
+    </ul>
+  </div>
 		</nav>
+
 	</div>
+	<br />
 
 <center>
 <span class="glyphicon glyphicon-map-marker"></span> 54,M.G. Avenue, PTC, Chennai,603110<p></p>

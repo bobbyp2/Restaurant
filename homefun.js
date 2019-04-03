@@ -12,5 +12,5 @@ function homeRedirect() {
 }
 function logout(){
 	
-	document.location = 'login.jsp';
+	document.location = 'LogoutController';
 }

@@ -57,8 +57,12 @@ staffList = new StaffDaoImpl().getAllStaff();
 
 <table class="table table-stripped">
 	<% for( Staff temp: staffList) { %>
-	<tr style="color:white"> <td> <%=temp.getFirst_name() %> </td>   <td> <%=temp.getLast_name() %> </td> <td> <%= temp.getAge() %></td><td><%=temp.getGender() %> </td>  <td> <%=temp.getAddress() %> </td>  <td><%=temp.getStaff_id()%> </td><td><a href="DeleteStaffController?s1=<%=temp.getStaff_id() %>" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> DELETE</a></td> </tr>
+	<tr style="color:white"> <td> <%=temp.getFirst_name() %> </td>   <td> <%=temp.getLast_name() %> </td> <td> <%= temp.getAge() %></td><td><%=temp.getGender() %> </td>  
+	<td> <%=temp.getAddress() %> </td>  <td><%=temp.getStaff_id()%> </td><td>
+	<a href="DeleteStaffController?s1=<%=temp.getStaff_id() %>" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> DELETE</a></td>
+	<td><a href="EditController?id=<%=temp.getStaff_id()%>"class="btn btn-info" ><span class="glyphicon glyphicon-edit"></span> EDIT</a></td><td> </tr>
 	<%} %>
+	
 </table>
 </body>
 </html>

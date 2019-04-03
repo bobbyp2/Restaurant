@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Dao.ProductDAO;
 import Dao.ProductDAOImpl;
 import model.Product;
 
@@ -34,7 +35,8 @@ public class EditProductController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt( request.getParameter("e1") );
+		int id = Integer.parseInt( request.getParameter("id") );
+		
 		Product m = new Product();
 		ProductDAOImpl dao = new ProductDAOImpl();
 		m = dao.getUserById(id);
@@ -49,13 +51,47 @@ public class EditProductController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		int id = Integer.parseInt( request.getParameter("e1") );
-		Product product = new Product();
-		ProductDAOImpl dao = new ProductDAOImpl();
-		product = dao.getUserById(id);
-		request.setAttribute("key1", product);
-		request.getRequestDispatcher("editdetails.jsp").forward(request, response);
+		//
+		System.out.println("Yaay Got values");
+		int inventoryid = Integer.parseInt( request.getParameter("inventoryid") );
 		
+		String inventoryname = request.getParameter("inventoryname");
+		System.out.println(inventoryname);
+		String creationdate =  request.getParameter("creationdate");
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = null;
+		try {
+			date = sdf1.parse(creationdate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		java.sql.Date creationdate1 = new java.sql.Date(date.getTime());  
+		String startdate = request.getParameter("startdate");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			 date = sdf.parse(startdate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		java.sql.Date startdate1 = new java.sql.Date(date.getTime());  
+		
+		String enddate = request.getParameter("enddate");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			date = sdf2.parse(enddate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		java.sql.Date enddate1 = new java.sql.Date(date.getTime());
+		int totalstock = Integer.parseInt(request.getParameter("totalstock"));
+		Product product = new Product(inventoryid, inventoryname, creationdate1, startdate1, enddate1, totalstock);
+		ProductDAOImpl dao = new ProductDAOImpl();
+		dao.updateProduct(product);
+		response.sendRedirect("display.jsp");
 		
 	}
 

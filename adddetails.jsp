@@ -9,17 +9,17 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<h1>
-	<center>
-		<b><p style="color: tomato; font-size: 50px;">WELCOME TO GESBK
-				RESTAURANT</p></b>
-	</center>
-</h1>
+
 </head>
 <body class="container-solid" background="restrobg.png"
 	style="color: white;">
-
+<h1 colspan ="1">
+	<center>
+		<p style="color: tomato; font-size: 50px;">WELCOME TO GESBK
+				RESTAURANT</p></center>
+</h1>
 	<%
+	
 		String c_name = null;
 		if (request.getSession().getAttribute("Current_User_Name")== null) {
 			response.sendRedirect("login.jsp");
@@ -27,14 +27,11 @@
 			c_name = request.getSession().getAttribute("Current_User_Name").toString().toUpperCase();
 		}
 	%>
-	 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-     <h2><center style = 'color:tomato;'>Dishes</center></h2>
-    </div>
-	<nav class="navbar navbar-collapse-lg navbar-tranperency bg-transperency">
-  <a class="navbar-brand" href="#">GR</a>
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>Profile
-  </button>
+	<nav class="navbar navbar-transperency-lg navbar-tranperency bg-transperency">
+  <a class="navbar-transperency" href="#">GR</a>
+ <!--   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>Logout
+  </button>-->
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
@@ -42,18 +39,22 @@
         <%=c_name%>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#" onclick="changePassword();">Change Password</a>
-          <a class="dropdown-item" href="#" onclick="logout();">Logout</a>
+          <a class="dropdown-item-transperency bg-transperency"  href="#" onclick="changePassword();">Change Password</a>
+          <a class="dropdown-item" href="LogoutController">Logout</a>
         </div>
          	</li>
-	</div>
-<body background="restrobg.png">
-  <div class="container-solid">
-    <ul class="nav navbar-nav">
+         	</ul>
+         	</div>
+         	</nav>
+	<script src="homefun.js"></script>
+  <nav class="navbar navbar-transperency-lg navbar-tranperency bg-transperency">
+     <div>
+      <ul class="navbar-nav">
       <li><a href="adddetails.jsp">ADD Items</a></li>
       <li><a href="editdetails.jsp">EDIT Items</a></li>
       <li><a href="display.jsp">LIST ALL Items</a></li>
     </ul>
+</
   </div>
 </nav>
 <h2>Welcome to Add DETAILS</h2>

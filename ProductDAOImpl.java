@@ -39,6 +39,7 @@ try {
 			Connection con = DB.getConnection();
 			String sql ="select * from manager where inventory_id =?";
 			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, inventory_Id);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			  m = new Product(rs.getInt(1), rs.getString(2),rs.getDate(3), rs.getDate(4),rs.getDate(5), rs.getInt(6));
@@ -72,9 +73,9 @@ try {
 
 	@Override
 	public void updateProduct(Product product) {
-		 try {
+		 try {	System.out.println("Entering update SSection");
 				Connection con = DB.getConnection();
-				String sql = "update manaager set inventory_name =?, creation_date=?, start_date=?, end_date=?, total_stock = ? where inventory_id=?";
+				String sql = "update manager set inventory_name =?, creation_date=?, start_date=?, end_date=?, total_stock = ? where inventory_id=?";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, product.getInventory_Name());
 				ps.setDate(2, (Date) product.getCreation_date());
@@ -85,10 +86,11 @@ try {
 				int rowaffected = 	ps.executeUpdate();
 				System.out.println(rowaffected + " rows updated ");
 				con.close();
+				
 				 }catch(Exception e){
 					 System.out.println("Error: " + e);
 					 }
-		
+	
 	}
 
 	@Override

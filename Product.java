@@ -58,5 +58,4 @@ public class Product {
 	public void setTotal_Stock(int total_Stock) {
 		this.total_Stock = total_Stock;
 	}
-	
 }

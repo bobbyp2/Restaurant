@@ -45,12 +45,14 @@ public class LoginController extends HttpServlet {
 		User user=implObj.getUserByName(uname);
 		if(user.getPassword().equals(pwd))
 		{
+		
 			request.getSession().setAttribute("Current_User_Name", user.getUser_name().toUpperCase());
 			response.sendRedirect("home.jsp");
 		}
 		else
 		{
 			response.sendRedirect("login.jsp");
+			
 		}
 		
 	}

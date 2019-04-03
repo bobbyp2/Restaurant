@@ -1,6 +1,5 @@
-<%@page import="model.Product"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,61 +64,5 @@
 		</ul>
 	</div>
 	</nav>
-
-	<%
-		Product product = new Product();
-		product = (Product) request.getAttribute("key1");
-	%>
-
-	<h2>Welcome to Add DETAILS</h2>
-	<div class="container">
-		<form autocomplete="off" action="EditProductController" method="post" style="margin-top: 2%; margin-right: 40%; margin-left: 30%;">
-			<div class="form-group">
-				<label for="exampleInputEmail1">Enter the inventory id:</label> <input
-					type="text" class="form-control" placeholder="Enter Product Id"
-					readonly="readonly" name="inventoryid"
-					value="<%=product.getInventory_Id()%>" />
-			</div>
-			<br />
-			<p></p>
-			<div class="form-group">
-				<label>Enter inventory Name:</label> <input type="text"
-					class="form-control" placeholder="Enter the Product Name"
-					name="inventoryname" value="<%=product.getInventory_Name()%>" />
-			</div>
-			<br />
-			<p></p>
-			<div class="form-group">
-				<label> Enter creation date:</label> <input type="Date"
-					class="form-control" 
-					placeholder="Enter Product Creation Date" name="creationdate" value=<%=product.getCreation_date() %> />
-			</div>
-			<br />
-			<p></p>
-			<div class="form-group">
-				<label> Enter Start date:</label> <input type="Date"
-					class="form-control" placeholder="Enter Start Date"
-					name="startdate" value=<%=product.getStart_date() %>"/>
-			</div>
-			<br />
-			<p></p>
-			<div class="form-group">
-				<label> Enter End date:</label> <input type="Date"
-					class="form-control" placeholder="Enter End Date" name="enddate" value=<%=product.getEnd_date() %> />
-			</div>
-			<br />
-			<p></p>
-			<div class="form-group">
-				<label> Enter Total Stock:</label> <input type="text"
-					class="form-control" placeholder="Enter Total Stock"
-					name="totalstock" value=<%=product.getTotal_Stock() %>/>
-			</div>
-			<br />
-			<p></p>
-			<button type="submit" class="btn btn-info">Submit</button>
-			<br />
-			<p></p>
-		</form>
-	</div>
 </body>
 </html>
