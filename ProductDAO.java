@@ -7,4 +7,6 @@ public interface ProductDAO {
 	public List<Product> getAllProducts();
 	public void updateProduct(Product product);
 	public void deleteproduct(int inventory_Id);
+	public List<Product> searchProductByName(String pname);
 }
+

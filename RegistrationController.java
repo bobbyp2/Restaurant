@@ -42,15 +42,19 @@ public class RegistrationController extends HttpServlet {
 		String id=request.getParameter("uid");
 		String uname=request.getParameter("uname");
 		String pwd=request.getParameter("pwd");
-		User u=new User(id, uname, pwd);
 		UserDaoImpl implObj=new UserDaoImpl();
-		int flag=implObj.addUser(u);
-		if(flag!=0)
-		response.sendRedirect("success.jsp");
+		boolean count = implObj.getuserwhileregistration(uname);
+		if(count==false)
+		{
+		User u=new User(id, uname, pwd);
+		implObj.addUser(u);
+		request.getSession().setAttribute("regname",uname);
+		response.sendRedirect("login.jsp");	
+		}
 		else
 		{
-			request.setAttribute("myname",uname);
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			request.getSession().setAttribute("myname",uname);
+			response.sendRedirect("register.jsp");
 		}
 	}
 

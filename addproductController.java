@@ -17,7 +17,7 @@ import model.Product;
 /**
  * Servlet implementation class addManagerController
  */
-@WebServlet("/addManagerController")
+@WebServlet("/addproductController")
 public class addproductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,8 +45,8 @@ public class addproductController extends HttpServlet {
 		int inventoryid = Integer.parseInt( request.getParameter("inventoryid") );
 		String inventoryname = request.getParameter("inventoryname");
 		String creationdate =  request.getParameter("creationdate");
-		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = null;
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
 		try {
 			date = sdf1.parse(creationdate);
 		} catch (ParseException e) {
@@ -55,7 +55,7 @@ public class addproductController extends HttpServlet {
 		}
 		java.sql.Date creationdate1 = new java.sql.Date(date.getTime());  
 		String startdate = request.getParameter("startdate");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			 date = sdf.parse(startdate);
 		} catch (ParseException e) {
@@ -65,7 +65,7 @@ public class addproductController extends HttpServlet {
 		java.sql.Date startdate1 = new java.sql.Date(date.getTime());  
 		
 		String enddate = request.getParameter("enddate");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			date = sdf2.parse(enddate);
 		} catch (ParseException e) {
@@ -77,8 +77,8 @@ public class addproductController extends HttpServlet {
 		Product m = new Product(inventoryid, inventoryname, creationdate1, startdate1, enddate1, totalstock);
 		ProductDAOImpl mp = new ProductDAOImpl();
 		mp.addProduct(m);
-		
-		response.sendRedirect("adddetails.jsp");
+		request.getSession().setAttribute("add", inventoryid);
+		response.sendRedirect("display.jsp");
 		
 	}
 }

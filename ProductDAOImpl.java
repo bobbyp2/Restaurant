@@ -73,7 +73,7 @@ try {
 
 	@Override
 	public void updateProduct(Product product) {
-		 try {	System.out.println("Entering update SSection");
+		 try {
 				Connection con = DB.getConnection();
 				String sql = "update manager set inventory_name =?, creation_date=?, start_date=?, end_date=?, total_stock = ? where inventory_id=?";
 				PreparedStatement ps = con.prepareStatement(sql);
@@ -107,5 +107,29 @@ try {
 			 System.out.println("Error Manager Dao Adddetails method : " + e);
 	}
 }
-	
+
+	@Override
+	public List<Product> searchProductByName(String inventory_Name) {
+		List<Product> productList = new ArrayList<>();
+		try {
+			
+			Connection con = DB.getConnection();
+			String sql ="select * from manager where inventory_name like '%"+inventory_Name+"%'";
+			PreparedStatement ps = con.prepareStatement(sql);
+			System.out.println(ps);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				productList.add( new Product(rs.getInt(1), rs.getString(2),rs.getDate(3), rs.getDate(4),rs.getDate(5), rs.getInt(6)));
+				System.out.println(rs.getInt(1) + " = " + rs.getString(2));
+			}
+			con.close();
+			System.out.println("DAO->searchProductByName() Executed successfully");
+			
+		} catch (Exception e) {
+System.out.println("Error in listAllProducts() : "+ e);
+		}
+
+		return productList;
+	}
+
 }

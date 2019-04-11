@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.DB;
-import model.Product;
 import model.Staff;
+import model.User;
 
 public class StaffDaoImpl implements StaffDao {
 
@@ -76,7 +76,27 @@ public class StaffDaoImpl implements StaffDao {
 
 	@Override
 	public void updateStaff(Staff staff) {
-
+		System.out.println("testing testing"+staff.getStaff_id());
+		try
+		{
+			Connection con = DB.getConnection();
+			String qry = "update Staff set first_name=?,last_name =?,age =?,gender =?,address =? where Staff_id=?";
+			PreparedStatement ps = con.prepareStatement(qry);
+			System.out.println(ps);
+			ps.setString(1, staff.getFirst_name());
+			ps.setString(2, staff.getLast_name());
+			ps.setInt(3, staff.getAge());
+			ps.setString(4, staff.getGender());
+			ps.setString(5, staff.getAddress());
+			ps.setString(6, staff.getStaff_id());
+			int rowupdated = ps.executeUpdate();
+			System.out.println(rowupdated);
+			con.close();
+		}catch(Exception ex) {
+			System.out.println("Error : "+ex);
+			
+		}
+		
 	}
 
 	@Override
@@ -97,12 +117,45 @@ public class StaffDaoImpl implements StaffDao {
 		}
 
 	}
+	@Override
+	public Staff getStaffByName(String first_name) {
+		try
+		{
+			Connection con=DB.getConnection();
+			PreparedStatement ps=con.prepareStatement("select * from staff where first_name=?");
+			ps.setString(1, first_name);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			Staff staff=new Staff(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5));
+			con.close();
+			return staff;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error at getUserByName Method : "+e );
+		}
+		
+		return null;
+	}
 
 	@Override
 	public Staff getStaffById(String staff_id) {
+		try
+		{
+			Connection con=DB.getConnection();
+			PreparedStatement ps=con.prepareStatement("select * from staff where staff_id=?");
+			ps.setString(1, staff_id);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			Staff staff=new Staff(rs.getString(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6));
+			con.close();
+			return staff;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Error at getUserByName Method : "+e );
+		}
+		
 		return null;
-
 	}
-
-	
 }

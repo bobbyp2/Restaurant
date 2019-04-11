@@ -9,9 +9,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
 <title>Change Password</title>
-<h1><center><b><p style="color:tomato;font-size:50px;">WELCOME TO GESBK RESTAURANT</p></b></center></h1>
+
 </head>
 <body background="restrobg.png" style ="color:white;">
+<center><p style="color:tomato;font-size:50px;">WELCOME TO GESBK RESTAURANT</p></center>
 <form autocomplete="off" action="PasswordController" method="post" style="margin-top:2%;margin-right:40%; margin-left:10%;">
   <div class="form-group">
     <label for="exampleInputEmail1">Enter User ID</label>
@@ -27,5 +28,6 @@
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<script src="homefun.js"></script>
 </body>
 </html>

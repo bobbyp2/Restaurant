@@ -59,5 +59,8 @@ public class Staff {
 		this.gender = gender;
 		this.address = address;
 	}
+	public Staff() {
+		// TODO Auto-generated constructor stub
+	}
 	
 }

@@ -1,7 +1,6 @@
 package Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Dao.ProductDAO;
 import Dao.ProductDAOImpl;
 import model.Product;
 
@@ -52,15 +50,13 @@ public class EditProductController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		//
-		System.out.println("Yaay Got values");
 		int inventoryid = Integer.parseInt( request.getParameter("inventoryid") );
 		
 		String inventoryname = request.getParameter("inventoryname");
-		System.out.println(inventoryname);
 		String creationdate =  request.getParameter("creationdate");
 		
-		SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = null;
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
 		try {
 			date = sdf1.parse(creationdate);
 		} catch (ParseException e) {
@@ -69,7 +65,7 @@ public class EditProductController extends HttpServlet {
 		}
 		java.sql.Date creationdate1 = new java.sql.Date(date.getTime());  
 		String startdate = request.getParameter("startdate");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			 date = sdf.parse(startdate);
 		} catch (ParseException e) {
@@ -79,7 +75,7 @@ public class EditProductController extends HttpServlet {
 		java.sql.Date startdate1 = new java.sql.Date(date.getTime());  
 		
 		String enddate = request.getParameter("enddate");
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			date = sdf2.parse(enddate);
 		} catch (ParseException e) {

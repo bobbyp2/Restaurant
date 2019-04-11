@@ -38,23 +38,38 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 		String uname=request.getParameter("uname");
 		String pwd=request.getParameter("pwd");
 		UserDaoImpl implObj=new UserDaoImpl();
 		User user=implObj.getUserByName(uname);
+		if(user==null) {
+			request.getSession().setAttribute("access", "Invalid Credentials");
+			response.sendRedirect("login.jsp");
+		}
+		else {
+		if(user.getUser_name().equals(uname))
+		{
 		if(user.getPassword().equals(pwd))
 		{
 		
 			request.getSession().setAttribute("Current_User_Name", user.getUser_name().toUpperCase());
 			response.sendRedirect("home.jsp");
+		}else
+		{
+			request.getSession().setAttribute("access", "Invalid Credentials");
+			response.sendRedirect("login.jsp");
+			
+		}
 		}
 		else
-		{
+		{	
+			request.getSession().setAttribute("access", "Invalid Credentials");
 			response.sendRedirect("login.jsp");
 			
 		}
 		
-	}
+		}
+		}
 
 }

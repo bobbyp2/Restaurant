@@ -9,19 +9,52 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<h1>
-	<center>
-		<b><p style="color: tomato; font-size: 50px;">WELCOME TO GESBK
-				RESTAURANT</p></b>
-	</center>
-</h1>
-</head>
-<body class="container-solid" background="restrobg.png"
-	style="color: white;">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>	
+<script>
+function showResult(str) {
+	
+  if (str.length == 0) { 
+    document.getElementById("result").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("result").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "SearchProductController?q=" + str, true);
+    xmlhttp.send();
+  }
+}	 
+</script>
 
+<style type="text/css">
+table{
+align: right;
+  font-family: arial, sans-serif;
+  width: 1200px;
+  height:30px;
+  color:white;
+  padding:20px;
+  border-collapse:seperate;
+  background-color:seagreen;
+  font-size:15px;
+  border-radius:30px;
+}
+</style>
+
+</head>
+
+
+<body class="container-solid" style="background:lightgoldenrodyellow;color: white;">
+<center>
+		<p style="color: tomato; font-size: 50px;">WELCOME TO GESBK
+				RESTAURANT</p>
+	</center>
 	<%
 		String c_name = null;
 		if (request.getSession().getAttribute("Current_User_Name")== null) {
@@ -30,42 +63,51 @@
 			c_name = request.getSession().getAttribute("Current_User_Name").toString().toUpperCase();
 		}
 	%>
-	<nav class="navbar navbar-collapse-lg navbar-tranperency bg-transperency">
-  <a class="navbar-brand" href="#">GR</a>
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>Profile
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <%=c_name%>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#" onclick="changePassword();">Change Password</a>
-          <a class="dropdown-item" href="#" onclick="logout();">Logout</a>
-        </div>
-         	</li>
-	</div>
-    <div class="col-md-6">
- <form class="navbar-form navbar-center" action="display.jsp">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
+	<div class="container-fluid">
+	 <div class="row">
+    <div class = "col-sm-2">
+    <a href="home.jsp">Home</a>
       </div>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>	
-    </div>
-  </div>
-  </div>
-</nav>
-<h3>List of all Available ITEMS :</h3>
+        <div class="col-sm-2" style="font-size:20px;">
+         <a href="adddetails.jsp">ADD Inventory</a>
+       </div>
+       <div class="col-sm-2" style="font-size:20px;">
+      <a href="display.jsp">Edit And Display of Inventory </a>
+       </div>
+       <div class="col-sm-2">
+       </div>
+       <div class="col-sm-2">
+      <form>
+      <div class="form-group">
+        <input type="text" class="form-control" onkeyup = "showResult(this.value)" placeholder="Search" name="search">
+      </div>
+    </form>
+       </div>
+       <div class="col-sm-2" style="font-size:20px;">
+         <div class="dropdown">
+           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"style="float:right"><%=c_name%>
+           <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+             <li class = "dropdown-item"><a href="#"onclick="changePassword();">Change Password</a></li>
+             <li class = "dropdown-item"><a href="LogoutController">Logout</a></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<center><h3 style ="color:MediumSeaGreen">List of all Available ITEMS :</h3></center>
 
 <%
 	List<Product> productList = new ArrayList<>();
 productList = new ProductDAOImpl().getAllProducts();
 %>
 
-<table class="table table-hover">
+<div id="result">
+<b><center><table class="table1">
+	<tr class ="table"><th>Inventory id</th><th>Inventory Name</th><th> Creation Date</th><th> Start Date</th><th> End Date</th><th>Total Stock</th><th> Edit</th><th>Delete</th></tr>
+	</b>
 	<%
 		for( Product temp: productList) {
 	%>
@@ -74,6 +116,12 @@ productList = new ProductDAOImpl().getAllProducts();
 	<a href="EditProductController?id=<%=temp.getInventory_Id()%>"class="btn btn-info" ><span class="glyphicon glyphicon-edit"></span> EDIT</a></td><td>
 	<a href="DeleteProductController?q1=<%=temp.getInventory_Id()%>" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> DELETE</a></td> </tr>
 	<%} %>
-</table>
+</table></center>
+<script src="homefun.js"></script>
+</div>
+<%if(request.getSession().getAttribute("add")==null){ %>
+ <%}else{String str=request.getSession().getAttribute("add").toString(); %>
+ <b style = "color:MediumSeaGreen">&nbsp;&nbsp; Inventory added Successfully </b>
+ <% request.getSession().setAttribute("add",null);} %>
 </body>
 </html>

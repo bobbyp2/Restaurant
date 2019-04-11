@@ -45,9 +45,10 @@ public class AddStaffController extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		if(flag!=0)
 		{
-			out.print("Successfully Added");
+			
 			request.getAttribute("myname");
-			request.getRequestDispatcher("staff.jsp").forward(request, response);
+			request.getRequestDispatcher("displayStaff.jsp").forward(request, response);
+			out.print("Successfully Added");
 		}
 		else
 		{
